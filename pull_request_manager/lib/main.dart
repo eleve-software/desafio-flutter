@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'routes.dart';
 import 'ui/screens/home_screen.dart';
 
 void main() {
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      routes: Routes.routes,
       home: HomeScreen(),
     );
   }
