@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'pull_request_status.dart';
+
 class PullRequestItem extends StatelessWidget {
   const PullRequestItem({
     Key key,
@@ -50,41 +52,10 @@ class PullRequestItem extends StatelessWidget {
             ),
           ),
           SizedBox(height: 8.0),
-          Row(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.0),
-                  color: Theme.of(context).primaryColor.withOpacity(0.6),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 4.0,
-                    horizontal: 8.0,
-                  ),
-                  child: Text(
-                    'Open',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-              SizedBox(width: 8.0),
-              Text(
-                '#333',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(width: 10.0),
-              Text(
-                '3d ago',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
+          PullRequestStatus(
+            status: 'Open',
+            id: '#333',
+            timeAgo: '3d ago',
           ),
         ],
       ),
