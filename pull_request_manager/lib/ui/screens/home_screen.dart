@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pull_request_manager/routes.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -42,7 +43,10 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () => Navigator.pushNamed(
+                  context,
+                  Routes.repository,
+                ),
               )
             ],
           ),
