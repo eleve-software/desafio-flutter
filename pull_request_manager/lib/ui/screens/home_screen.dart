@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pull_request_manager/routes.dart';
+
+import '../../routes.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
