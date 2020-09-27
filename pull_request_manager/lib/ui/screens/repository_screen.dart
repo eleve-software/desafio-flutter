@@ -22,13 +22,9 @@ class RepositoryScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Container(
-                        width: 45.0,
-                        height: 45.0,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(45.0),
-                        ),
+                      CircleAvatar(
+                        radius: 22.0,
+                        backgroundColor: Colors.grey.shade300,
                         child: Icon(
                           Icons.person,
                           color: Colors.grey,
