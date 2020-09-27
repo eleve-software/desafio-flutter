@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pull_request_manager/routes.dart';
 
 import '../widgtes/back_button.dart';
 import '../widgtes/pull_request_item.dart';
@@ -7,6 +8,7 @@ class PullRequestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       body: SafeArea(
         child: Column(
           children: [
@@ -41,7 +43,13 @@ class PullRequestScreen extends StatelessWidget {
               child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return PullRequestItem();
+                  return GestureDetector(
+                    child: PullRequestItem(),
+                    onTap: () => Navigator.pushNamed(
+                      context,
+                      Routes.pullRequestDetail,
+                    ),
+                  );
                 },
               ),
             )
