@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pull_request_manager/routes.dart';
 
 import '../widgtes/repository_item.dart';
 
@@ -69,7 +70,13 @@ class RepositoryScreen extends StatelessWidget {
               child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return RepositoryItem();
+                  return GestureDetector(
+                    child: RepositoryItem(),
+                    onTap: () => Navigator.pushNamed(
+                      context,
+                      Routes.pullRequest,
+                    ),
+                  );
                 },
               ),
             )
