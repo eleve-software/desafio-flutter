@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../routes.dart';
+import '../../blocs/user_bloc.dart';
+import '../../data/models/user.dart';
+import '../widgtes/user_info.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _textController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final _userBloc = Provider.of<UserBloc>(context, listen: false);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -28,6 +40,7 @@ class HomeScreen extends StatelessWidget {
                   border: OutlineInputBorder(),
                   hintText: 'Nome do usuário',
                 ),
+                controller: _textController,
               ),
               SizedBox(height: 18.0),
               FlatButton(
@@ -45,15 +58,36 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                onPressed: () => Navigator.pushNamed(
-                  context,
-                  Routes.repository,
-                ),
-              )
+                onPressed: () {
+                  _userBloc.searchUser(_textController.text);
+                  _textController.clear();
+                },
+              ),
+              StreamBuilder<User>(
+                stream: _userBloc.stream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Usuário não encontrado.');
+                  }
+
+                  if (snapshot.hasData) {
+                    final user = snapshot.data;
+                    return UserInfo(user: user);
+                  }
+
+                  return Container();
+                },
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
   }
 }
