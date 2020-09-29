@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../blocs/user_bloc.dart';
 import '../../data/models/user.dart';
+import '../../setup_locator.dart';
 import '../widgtes/user_info.dart';
+import 'repository_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,11 +13,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _textController = TextEditingController();
+  final _userBloc = getIt.get<UserBloc>();
 
   @override
   Widget build(BuildContext context) {
-    final _userBloc = Provider.of<UserBloc>(context, listen: false);
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 'GitHub - Pull Request Manager',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 24.0,
+                  fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -61,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {
                   _userBloc.searchUser(_textController.text);
                   _textController.clear();
+                  FocusScope.of(context).unfocus();
                 },
               ),
               StreamBuilder<User>(
@@ -72,7 +73,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   if (snapshot.hasData) {
                     final user = snapshot.data;
-                    return UserInfo(user: user);
+                    return GestureDetector(
+                      child: UserInfo(
+                        user: user,
+                      ),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => RepositoryScreen(
+                            user: user,
+                          ),
+                        ),
+                      ),
+                    );
                   }
 
                   return Container();
@@ -88,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     _textController.dispose();
+    _userBloc.dispose();
     super.dispose();
   }
 }
