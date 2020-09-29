@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../data/models/repository.dart';
 import 'repository_footer_item.dart';
 
 class RepositoryItem extends StatelessWidget {
+  final Repository repository;
+
   const RepositoryItem({
     Key key,
+    @required this.repository,
   }) : super(key: key);
 
   @override
@@ -23,7 +27,7 @@ class RepositoryItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'repository-name',
+            repository.name,
             style: TextStyle(
               fontSize: 18.0,
               color: Colors.black87,
@@ -32,7 +36,7 @@ class RepositoryItem extends StatelessWidget {
           ),
           SizedBox(height: 5.0),
           Text(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
+            repository.description,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -45,17 +49,17 @@ class RepositoryItem extends StatelessWidget {
             children: [
               RepositoryFooterItem(
                 icon: Icons.star,
-                title: '3.1k stars',
+                title: repository.stargazersCount.toString(),
               ),
               SizedBox(width: 5.0),
               RepositoryFooterItem(
-                icon: Icons.star,
-                title: '3.1k forks',
+                icon: Icons.restaurant,
+                title: repository.forksCount.toString(),
               ),
               SizedBox(width: 5.0),
               RepositoryFooterItem(
-                icon: Icons.star,
-                title: '3.1k PRs',
+                icon: Icons.report_problem,
+                title: repository.openIssuesCount.toString(),
               ),
             ],
           ),

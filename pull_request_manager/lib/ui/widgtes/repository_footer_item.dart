@@ -16,7 +16,7 @@ class RepositoryFooterItem extends StatelessWidget {
       children: [
         Icon(
           icon,
-          size: 20.0,
+          size: 16.0,
           color: Colors.black.withOpacity(0.7),
         ),
         SizedBox(width: 5.0),
