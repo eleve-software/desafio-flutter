@@ -1,1 +1,1 @@
-const baseUrl = 'https://api.github.com/users/';
+const baseUrl = 'https://api.github.com';
