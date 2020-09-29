@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../../blocs/repository_bloc.dart';
 import '../../data/models/repository.dart';
 import '../../data/models/user.dart';
-import '../../routes.dart';
 import '../../setup_locator.dart';
 import '../../shared/widgets/loading.dart';
 import '../widgtes/repository_item.dart';
+import 'pull_request_screen.dart';
 
 class RepositoryScreen extends StatefulWidget {
   final User user;
@@ -89,13 +89,20 @@ class _RepositoryScreenState extends State<RepositoryScreen> {
                     return ListView.builder(
                       itemCount: repositories.length,
                       itemBuilder: (context, index) {
+                        final repository = repositories[index];
                         return GestureDetector(
                           child: RepositoryItem(
-                            repository: repositories[index],
+                            repository: repository,
                           ),
-                          onTap: () => Navigator.pushNamed(
+                          // TODO: Construtor static para rotas
+                          onTap: () => Navigator.push(
                             context,
-                            Routes.pullRequest,
+                            MaterialPageRoute(
+                              builder: (_) => PullRequestScreen(
+                                username: widget.user.login,
+                                repository: repository.name,
+                              ),
+                            ),
                           ),
                         );
                       },

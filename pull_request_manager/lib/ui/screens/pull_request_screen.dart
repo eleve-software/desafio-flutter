@@ -1,10 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:pull_request_manager/routes.dart';
 
+import '../../blocs/pull_request_bloc.dart';
+import '../../data/models/pull_request.dart';
+import '../../routes.dart';
+import '../../setup_locator.dart';
+import '../../shared/widgets/loading.dart';
 import '../widgtes/back_button.dart';
 import '../widgtes/pull_request_item.dart';
 
-class PullRequestScreen extends StatelessWidget {
+class PullRequestScreen extends StatefulWidget {
+  final String username;
+  final String repository;
+  final pullRequestBloc = getIt.get<PullRequestBloc>();
+
+  PullRequestScreen({
+    Key key,
+    @required this.username,
+    @required this.repository,
+  }) : super(key: key);
+
+  @override
+  _PullRequestScreenState createState() => _PullRequestScreenState();
+}
+
+class _PullRequestScreenState extends State<PullRequestScreen> {
+  @override
+  void initState() {
+    super.initState();
+    widget.pullRequestBloc.fetchPullRequests(
+      widget.username,
+      widget.repository,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,16 +68,27 @@ class PullRequestScreen extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    child: PullRequestItem(),
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      Routes.pullRequestDetail,
-                    ),
-                  );
+              child: StreamBuilder<List<PullRequest>>(
+                stream: widget.pullRequestBloc.stream,
+                builder: (context, snapshot) {
+                  final pullRequests = snapshot.data;
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: pullRequests.length,
+                      itemBuilder: (context, index) {
+                        final pullRequest = pullRequests[index];
+                        // TODO: Itens e implementação dos comments
+                        return GestureDetector(
+                          child: PullRequestItem(),
+                          onTap: () => Navigator.pushNamed(
+                            context,
+                            Routes.pullRequestDetail,
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  return Loading(text: '⌛ Carregando pull requests...');
                 },
               ),
             )

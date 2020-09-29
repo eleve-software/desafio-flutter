@@ -11,7 +11,7 @@ class PullRequestBloc implements Bloc {
 
   Stream<List<PullRequest>> get stream => _controller.stream;
 
-  void fetchRepositories(String username, String repository) async {
+  void fetchPullRequests(String username, String repository) async {
     final repositories =
         await _repositoryRepository.getPullRequests(username, repository);
     _controller.sink.add(repositories);
