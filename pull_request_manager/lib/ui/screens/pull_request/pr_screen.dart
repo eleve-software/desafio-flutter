@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../blocs/pull_request_bloc.dart';
-import '../../data/models/pull_request.dart';
-import '../../routes.dart';
-import '../../setup_locator.dart';
-import '../../shared/widgets/loading.dart';
-import '../widgtes/back_button.dart';
-import '../widgtes/pull_request_item.dart';
+import '../../../blocs/pull_request_bloc.dart';
+import '../../../data/models/pull_request.dart';
+import '../../../routes.dart';
+import '../../../setup_locator.dart';
+import '../../widgtes/back_button.dart';
+import '../../widgtes/loading.dart';
+import 'widgets/pr_item.dart';
 
 class PullRequestScreen extends StatefulWidget {
   final String username;

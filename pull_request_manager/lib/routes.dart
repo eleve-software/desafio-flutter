@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 
-import 'ui/screens/home_screen.dart';
-import 'ui/screens/pull_request_detail_screen.dart';
-import 'ui/screens/pull_request_screen.dart';
-import 'ui/screens/repository_screen.dart';
+import 'ui/screens/home/home_screen.dart';
+import 'ui/screens/pull_request/detail_screen.dart';
+import 'ui/screens/pull_request/pr_screen.dart';
+import 'ui/screens/repository/repo_screen.dart';
 
 class Routes {
   Routes._();
@@ -17,6 +17,6 @@ class Routes {
     home: (context) => HomeScreen(),
     repository: (context) => RepositoryScreen(),
     pullRequest: (context) => PullRequestScreen(),
-    pullRequestDetail: (context) => PullRequestDetailScreen(),
+    pullRequestDetail: (context) => DetailScreen(),
   };
 }

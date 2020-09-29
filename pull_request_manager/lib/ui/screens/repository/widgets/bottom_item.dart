@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class RepositoryFooterItem extends StatelessWidget {
+class BottomItem extends StatelessWidget {
   final IconData icon;
   final String title;
 
-  const RepositoryFooterItem({
+  const BottomItem({
     Key key,
     @required this.icon,
     @required this.title,

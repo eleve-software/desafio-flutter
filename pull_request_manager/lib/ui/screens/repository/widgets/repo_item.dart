@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../data/models/repository.dart';
-import 'repository_footer_item.dart';
+import '../../../../data/models/repository.dart';
+import 'bottom_item.dart';
 
 class RepositoryItem extends StatelessWidget {
   final Repository repository;
@@ -47,17 +47,17 @@ class RepositoryItem extends StatelessWidget {
           SizedBox(height: 8.0),
           Row(
             children: [
-              RepositoryFooterItem(
+              BottomItem(
                 icon: Icons.star,
                 title: repository.stargazersCount.toString(),
               ),
               SizedBox(width: 5.0),
-              RepositoryFooterItem(
+              BottomItem(
                 icon: Icons.restaurant,
                 title: repository.forksCount.toString(),
               ),
               SizedBox(width: 5.0),
-              RepositoryFooterItem(
+              BottomItem(
                 icon: Icons.report_problem,
                 title: repository.openIssuesCount.toString(),
               ),

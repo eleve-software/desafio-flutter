@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'routes.dart';
 import 'setup_locator.dart';
-import 'ui/screens/home_screen.dart';
+import 'ui/screens/home/home_screen.dart';
 
 void main() {
   setupLocator();

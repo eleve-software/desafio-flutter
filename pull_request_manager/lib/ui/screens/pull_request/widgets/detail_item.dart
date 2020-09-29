@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PullRequestDetailItem extends StatelessWidget {
+class DetailItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

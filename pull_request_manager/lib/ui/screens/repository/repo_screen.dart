@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../blocs/repository_bloc.dart';
-import '../../data/models/repository.dart';
-import '../../data/models/user.dart';
-import '../../setup_locator.dart';
-import '../../shared/widgets/loading.dart';
-import '../widgtes/repository_item.dart';
-import 'pull_request_screen.dart';
+import '../../../blocs/repository_bloc.dart';
+import '../../../data/models/repository.dart';
+import '../../../data/models/user.dart';
+import '../../../setup_locator.dart';
+import '../../widgtes/loading.dart';
+import '../pull_request/pr_screen.dart';
+import 'widgets/repo_item.dart';
 
 class RepositoryScreen extends StatefulWidget {
   final User user;

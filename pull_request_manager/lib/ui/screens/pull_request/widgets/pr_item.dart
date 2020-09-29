@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'pull_request_status.dart';
+import 'pr_status.dart';
 
 class PullRequestItem extends StatelessWidget {
   const PullRequestItem({

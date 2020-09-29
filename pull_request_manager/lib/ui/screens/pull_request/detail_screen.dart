@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../widgtes/back_button.dart';
-import '../widgtes/pull_request_detail_item.dart';
-import '../widgtes/pull_request_status.dart';
+import '../../widgtes/back_button.dart';
+import 'widgets/detail_item.dart';
+import 'widgets/pr_status.dart';
 
-class PullRequestDetailScreen extends StatelessWidget {
+class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +81,7 @@ class PullRequestDetailScreen extends StatelessWidget {
               child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return PullRequestDetailItem();
+                  return DetailItem();
                 },
               ),
             )
