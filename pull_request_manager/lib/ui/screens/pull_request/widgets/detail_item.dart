@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../../../data/models/comment.dart';
+
 class DetailItem extends StatelessWidget {
+  final Comment comment;
+
+  const DetailItem({
+    Key key,
+    @required this.comment,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,9 +28,8 @@ class DetailItem extends StatelessWidget {
           CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.grey.shade300,
-            child: Icon(
-              Icons.person,
-              color: Colors.grey,
+            backgroundImage: NetworkImage(
+              comment.user.avatarUrl,
             ),
           ),
           Expanded(
@@ -42,7 +50,7 @@ class DetailItem extends StatelessWidget {
                   ),
                   SizedBox(height: 5.0),
                   Text(
-                    '@username',
+                    comment.user.login,
                     style: TextStyle(
                       fontSize: 15.0,
                       color: Colors.black87,
@@ -51,7 +59,7 @@ class DetailItem extends StatelessWidget {
                   ),
                   SizedBox(height: 8.0),
                   Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
+                    comment.body,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

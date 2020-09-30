@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
 
+import '../../../blocs/comment_bloc.dart';
+import '../../../data/models/comment.dart';
 import '../../../data/models/pull_request.dart';
+import '../../../setup_locator.dart';
 import '../../widgtes/back_button.dart';
+import '../../widgtes/loading.dart';
 import 'widgets/detail_item.dart';
 import 'widgets/pr_status.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   final PullRequest pullRequest;
+  final commentBloc = getIt.get<CommentBloc>();
 
-  const DetailScreen({
+  DetailScreen({
     Key key,
     @required this.pullRequest,
   }) : super(key: key);
+
+  @override
+  _DetailScreenState createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  @override
+  void initState() {
+    super.initState();
+    widget.commentBloc.fetchComments(widget.pullRequest.issueUrl);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +65,9 @@ class DetailScreen extends StatelessWidget {
                       right: 10.0,
                     ),
                     child: PullRequestStatus(
-                      status: pullRequest.state,
-                      id: pullRequest.number,
-                      timeAgo: pullRequest.createdAt,
+                      status: widget.pullRequest.state,
+                      id: widget.pullRequest.number,
+                      timeAgo: widget.pullRequest.createdAt,
                     ),
                   ),
                   Padding(
@@ -60,7 +76,7 @@ class DetailScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          pullRequest.title,
+                          widget.pullRequest.title,
                           style: TextStyle(
                             fontSize: 22.0,
                             color: Colors.black87,
@@ -69,7 +85,7 @@ class DetailScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 8.0),
                         Text(
-                          pullRequest.body,
+                          widget.pullRequest.body,
                           maxLines: 5,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -86,10 +102,44 @@ class DetailScreen extends StatelessWidget {
             ),
             SizedBox(height: 8.0),
             Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return DetailItem();
+              child: StreamBuilder<List<Comment>>(
+                stream: widget.commentBloc.stream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text(
+                        'Comentários não encontrado.',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    );
+                  }
+                  if (snapshot.hasData) {
+                    final comments = snapshot.data;
+                    if (comments.isEmpty) {
+                      return Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          'Esse PR ainda não tem nenhum comentário.',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      );
+                    }
+                    return ListView.builder(
+                      itemCount: comments.length,
+                      itemBuilder: (context, index) {
+                        return DetailItem(comment: comments[index]);
+                      },
+                    );
+                  }
+                  return Loading(text: '⌛ Carregando comentarios...');
                 },
               ),
             )
