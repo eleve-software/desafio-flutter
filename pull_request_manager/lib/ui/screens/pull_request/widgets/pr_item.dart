@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../../../data/models/pull_request.dart';
 import 'pr_status.dart';
 
 class PullRequestItem extends StatelessWidget {
+  final String repository;
+  final PullRequest pullRequest;
+
   const PullRequestItem({
     Key key,
+    @required this.repository,
+    @required this.pullRequest,
   }) : super(key: key);
 
   @override
@@ -26,7 +32,7 @@ class PullRequestItem extends StatelessWidget {
             children: [
               Icon(Icons.star, color: Colors.black54),
               Text(
-                '@username/repository-forked',
+                '${pullRequest.user}/$repository',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -41,7 +47,7 @@ class PullRequestItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 2.0),
             child: Text(
-              'Pull Request title',
+              pullRequest.title,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -53,9 +59,9 @@ class PullRequestItem extends StatelessWidget {
           ),
           SizedBox(height: 8.0),
           PullRequestStatus(
-            status: 'Open',
-            id: '#333',
-            timeAgo: '3d ago',
+            status: pullRequest.state,
+            id: pullRequest.number,
+            timeAgo: pullRequest.createdAt,
           ),
         ],
       ),

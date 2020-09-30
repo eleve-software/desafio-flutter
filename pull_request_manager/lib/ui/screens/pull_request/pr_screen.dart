@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pull_request_manager/ui/screens/pull_request/detail_screen.dart';
 
 import '../../../blocs/pull_request_bloc.dart';
 import '../../../data/models/pull_request.dart';
-import '../../../routes.dart';
 import '../../../setup_locator.dart';
 import '../../widgtes/back_button.dart';
 import '../../widgtes/loading.dart';
@@ -77,12 +77,18 @@ class _PullRequestScreenState extends State<PullRequestScreen> {
                       itemCount: pullRequests.length,
                       itemBuilder: (context, index) {
                         final pullRequest = pullRequests[index];
-                        // TODO: Itens e implementação dos comments
                         return GestureDetector(
-                          child: PullRequestItem(),
-                          onTap: () => Navigator.pushNamed(
+                          child: PullRequestItem(
+                            repository: widget.repository,
+                            pullRequest: pullRequest,
+                          ),
+                          onTap: () => Navigator.push(
                             context,
-                            Routes.pullRequestDetail,
+                            MaterialPageRoute(
+                              builder: (_) => DetailScreen(
+                                pullRequest: pullRequest,
+                              ),
+                            ),
                           ),
                         );
                       },

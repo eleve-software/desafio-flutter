@@ -16,6 +16,7 @@ class PullRequest {
   @JsonKey(name: 'title')
   final String title;
 
+  // Fix usuário null
   @JsonKey(name: 'user.login')
   final String user;
 

@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../../../data/models/pull_request.dart';
 import '../../widgtes/back_button.dart';
 import 'widgets/detail_item.dart';
 import 'widgets/pr_status.dart';
 
 class DetailScreen extends StatelessWidget {
+  final PullRequest pullRequest;
+
+  const DetailScreen({
+    Key key,
+    @required this.pullRequest,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,9 +49,9 @@ class DetailScreen extends StatelessWidget {
                       right: 10.0,
                     ),
                     child: PullRequestStatus(
-                      status: 'Open',
-                      id: '#333',
-                      timeAgo: '3d ago',
+                      status: pullRequest.state,
+                      id: pullRequest.number,
+                      timeAgo: pullRequest.createdAt,
                     ),
                   ),
                   Padding(
@@ -52,7 +60,7 @@ class DetailScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Pull Request title',
+                          pullRequest.title,
                           style: TextStyle(
                             fontSize: 22.0,
                             color: Colors.black87,
@@ -61,7 +69,7 @@ class DetailScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 8.0),
                         Text(
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
+                          pullRequest.body,
                           maxLines: 5,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(

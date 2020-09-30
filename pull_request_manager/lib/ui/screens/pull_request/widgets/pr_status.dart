@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class PullRequestStatus extends StatelessWidget {
   final String status;
-  final String id;
-  final String timeAgo;
+  final int id;
+  final DateTime timeAgo;
 
   const PullRequestStatus({
     Key key,
@@ -14,12 +14,16 @@ class PullRequestStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final daysAgo = DateTime.now().difference(timeAgo).inDays.toString();
+
     return Row(
       children: [
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.0),
-            color: Theme.of(context).primaryColor.withOpacity(0.6),
+            color: status == 'open'
+                ? Theme.of(context).primaryColor.withOpacity(0.6)
+                : Colors.red.withOpacity(0.6),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(
@@ -34,7 +38,7 @@ class PullRequestStatus extends StatelessWidget {
         ),
         SizedBox(width: 8.0),
         Text(
-          id,
+          '#${id.toString()}',
           style: TextStyle(
             color: Colors.grey,
             fontWeight: FontWeight.w500,
@@ -42,7 +46,7 @@ class PullRequestStatus extends StatelessWidget {
         ),
         SizedBox(width: 10.0),
         Text(
-          timeAgo,
+          '${daysAgo}d ago',
           style: TextStyle(
             color: Colors.grey,
             fontWeight: FontWeight.w500,
