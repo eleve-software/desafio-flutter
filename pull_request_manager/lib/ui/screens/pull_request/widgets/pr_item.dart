@@ -32,7 +32,7 @@ class PullRequestItem extends StatelessWidget {
             children: [
               Icon(Icons.star, color: Colors.black54),
               Text(
-                '${pullRequest.user}/$repository',
+                '${pullRequest.user.login}/$repository',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(

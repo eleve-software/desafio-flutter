@@ -3,6 +3,20 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pull_request.g.dart';
 
 @JsonSerializable(nullable: false)
+class UserPR {
+  @JsonKey(name: 'login')
+  final String login;
+
+  UserPR({
+    this.login,
+  });
+
+  factory UserPR.fromJson(Map<String, dynamic> json) => _$UserPRFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserPRToJson(this);
+}
+
+@JsonSerializable(nullable: false)
 class PullRequest {
   @JsonKey(name: 'issue_url')
   final String issueUrl;
@@ -16,9 +30,8 @@ class PullRequest {
   @JsonKey(name: 'title')
   final String title;
 
-  // Fix usuário null
-  @JsonKey(name: 'user.login')
-  final String user;
+  @JsonKey(name: 'user')
+  final UserPR user;
 
   @JsonKey(name: 'body')
   final String body;
