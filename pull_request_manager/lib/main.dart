@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'routes.dart';
 import 'setup_locator.dart';
 import 'ui/screens/home/home_screen.dart';
 
@@ -21,10 +20,10 @@ MaterialApp _buildApp() {
     debugShowCheckedModeBanner: false,
     title: 'Pull Request Manager',
     theme: ThemeData(
-      primarySwatch: Colors.green,
+      primarySwatch: Colors.teal,
+      brightness: Brightness.light,
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
-    routes: Routes.routes,
     home: HomeScreen(),
   );
 }
