@@ -4,6 +4,7 @@ import '../../../blocs/comment_bloc.dart';
 import '../../../data/models/comment.dart';
 import '../../../data/models/pull_request.dart';
 import '../../../setup_locator.dart';
+import '../../../shared/strings.dart';
 import '../../widgtes/back_button.dart';
 import '../../widgtes/loading.dart';
 import 'widgets/detail_item.dart';
@@ -108,7 +109,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   if (snapshot.hasError) {
                     return Center(
                       child: Text(
-                        'Comentários não encontrado.',
+                        Strings.commentNotFound,
                         style: TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.w500,
@@ -123,7 +124,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       return Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
-                          'Esse PR ainda não tem nenhum comentário.',
+                          Strings.commentEmpty,
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.w500,
@@ -139,7 +140,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       },
                     );
                   }
-                  return Loading(text: '⌛ Carregando comentarios...');
+                  return Loading(text: Strings.commentLoading);
                 },
               ),
             )

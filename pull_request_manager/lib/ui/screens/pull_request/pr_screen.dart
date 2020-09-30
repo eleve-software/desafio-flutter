@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pull_request_manager/ui/screens/pull_request/detail_screen.dart';
 
 import '../../../blocs/pull_request_bloc.dart';
 import '../../../data/models/pull_request.dart';
 import '../../../setup_locator.dart';
+import '../../../shared/strings.dart';
 import '../../widgtes/back_button.dart';
 import '../../widgtes/loading.dart';
+import 'detail_screen.dart';
 import 'widgets/pr_item.dart';
 
 class PullRequestScreen extends StatefulWidget {
@@ -54,7 +55,7 @@ class _PullRequestScreenState extends State<PullRequestScreen> {
                       AppBackButton(iconStyle: 'ios'),
                       SizedBox(width: 10.0),
                       Text(
-                        'Pull Requests',
+                        Strings.prTitle,
                         style: TextStyle(
                           fontSize: 18.0,
                           color: Colors.black87,
@@ -94,7 +95,7 @@ class _PullRequestScreenState extends State<PullRequestScreen> {
                       },
                     );
                   }
-                  return Loading(text: '⌛ Carregando pull requests...');
+                  return Loading(text: Strings.prLoading);
                 },
               ),
             )

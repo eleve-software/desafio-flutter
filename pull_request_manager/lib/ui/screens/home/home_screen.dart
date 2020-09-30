@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../blocs/user_bloc.dart';
 import '../../../data/models/user.dart';
 import '../../../setup_locator.dart';
+import '../../../shared/strings.dart';
 import '../repository/repo_screen.dart';
 import 'widgets/user_info.dart';
 
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'GitHub - Pull Request Manager',
+                Strings.appTitle,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 22.0,
@@ -68,7 +69,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 stream: _userBloc.stream,
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
-                    return Text('Usuário não encontrado.');
+                    return Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Center(
+                        child: Text('Usuário não encontrado.'),
+                      ),
+                    );
                   }
 
                   if (snapshot.hasData) {

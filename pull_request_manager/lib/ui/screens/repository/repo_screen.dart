@@ -4,6 +4,7 @@ import '../../../blocs/repository_bloc.dart';
 import '../../../data/models/repository.dart';
 import '../../../data/models/user.dart';
 import '../../../setup_locator.dart';
+import '../../../shared/strings.dart';
 import '../../widgtes/loading.dart';
 import '../pull_request/pr_screen.dart';
 import 'widgets/repo_item.dart';
@@ -67,7 +68,7 @@ class _RepositoryScreenState extends State<RepositoryScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: Text(
-                        'Logout',
+                        Strings.logout,
                         style: TextStyle(
                           fontSize: 16.0,
                           color: Colors.grey.shade200,
@@ -94,7 +95,6 @@ class _RepositoryScreenState extends State<RepositoryScreen> {
                           child: RepositoryItem(
                             repository: repository,
                           ),
-                          // TODO: Construtor static para rotas
                           onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -110,7 +110,7 @@ class _RepositoryScreenState extends State<RepositoryScreen> {
                   }
                   return Center(
                     child: Loading(
-                      text: '⌛ Carregando repositórios...',
+                      text: Strings.repoLoading,
                     ),
                   );
                 },
