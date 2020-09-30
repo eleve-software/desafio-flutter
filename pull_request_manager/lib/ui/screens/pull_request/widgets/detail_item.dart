@@ -12,6 +12,8 @@ class DetailItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _daysAgo = DateTime.now().difference(comment.createdAt).inDays;
+
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 16.0,
@@ -42,7 +44,7 @@ class DetailItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '3d ago',
+                    '${_daysAgo}d ago',
                     style: TextStyle(
                       fontSize: 15.0,
                       color: Colors.grey,
