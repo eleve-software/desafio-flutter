@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import '../../setup_locator.dart';
 import '../../shared/contants.dart';
+import '../models/comment.dart';
 import '../models/pull_request.dart';
 import '../models/repository.dart';
 import '../models/user.dart';
@@ -57,6 +58,24 @@ class GitHubProvider {
         throw ('Esse repositório ainda não tem nenhum pull request.');
       }
     } catch (error) {
+      throw ('Ocorreu um erro.');
+    }
+  }
+
+  Future<List<Comment>> getComments(String issuUrl) async {
+    final url = '$issuUrl/comments';
+    print(url);
+    try {
+      final response = await _client.get(url);
+      if (response.statusCode == 200) {
+        final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+        print(parsed);
+        return parsed.map<Comment>((json) => Comment.fromJson(json)).toList();
+      } else {
+        throw ('Esse pull request ainda não tem nenhum comentário.');
+      }
+    } catch (error) {
+      print(error.toString());
       throw ('Ocorreu um erro.');
     }
   }
